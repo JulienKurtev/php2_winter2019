@@ -12,24 +12,26 @@ class TemplateManager
 
     protected $htmlTempleta;
     protected $data = [];
+
+
     
     public function loadTemplate(){
          // Prepare view output.
-        if ($data['postLoginForm'] === TRUE) {
+        if ($this->data['postLoginForm'] === TRUE) {
             
-            switch ($data['errorMessage']) {
+            switch ($this->data['errorMessage']) {
                 
                 case 0:
-                    $data['userMessage'] = 'Please sign in.';
+                    $this->data['userMessage'] = 'Please sign in.';
                     break;
                 case 1:
-                    $data['userMessage'] = 'Wrong credentials.  <a href="index.php">Try again</a>.';
+                    $this->data['userMessage'] = 'Wrong credentials.  <a href="index.php">Try again</a>.';
                     break;
                 case 2:
-                    $data['userMessage'] = 'You are logged out!  <a href="index.php">You can login again</a>.';
+                    $this->data['userMessage'] = 'You are logged out!  <a href="index.php">You can login again</a>.';
                     break;
                 case 3:
-                    $data['userMessage'] = 'Invalid session. <a href="index.php">Please login again</a>.';
+                    $this->data['userMessage'] = 'Invalid session. <a href="index.php">Please login again</a>.';
                     break;
             
                 }
@@ -58,7 +60,7 @@ class TemplateManager
        
         
 
-         if ($this->$data['errorMessage'] === 0) {
+         if ($this->data['errorMessage'] === 0) {
 
                     $this->htmlTempleta .= "\t<div class=\"container\">\n";
                     $this->htmlTempleta .= "\t\t<form class=\"form-signin\" action=\"index.php\" method=\"post\" data-toggle=\"validator\" role=\"form\">\n";
@@ -84,7 +86,7 @@ class TemplateManager
                     $this->htmlTempleta .= "\t<div class=\"container theme-showcase\" role=\"main\">\n";
                     $this->htmlTempleta .= "\t\t<!-- Main jumbotron for a primary marketing message or call to action -->\n";
                     $this->htmlTempleta .= "\t\t<div class=\"jumbotron\">\n";
-                    $this->htmlTempleta .= "\t\t\t<h2>" . $this->$data['userMessage'] . "</h2>\n";
+                    $this->htmlTempleta .= "\t\t\t<h2>" . $this->data['userMessage'] . "</h2>\n";
                     $this->htmlTempleta .= "\t\t</div> <!-- /jumbotron -->\n";
                     $this->htmlTempleta .= "\t</div> <!-- /container -->\n\n";
 

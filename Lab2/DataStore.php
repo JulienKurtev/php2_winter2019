@@ -1,6 +1,6 @@
 <?php
-
-function getConnection($getLink = TRUE)
+class DataStore {
+protected function getConnection($getLink = TRUE)
 {
 
     static $link = NULL;
@@ -20,7 +20,7 @@ function getConnection($getLink = TRUE)
 
 }
 
-function getQuote()
+protected function getQuote()
 {
 
     return "'";
@@ -43,12 +43,12 @@ function queryResults($query)
 }
 
 // SELECT `username`, `password` FROM `users` WHERE `username` LIKE $username;
-function checkLogin($username, $password)
+public function checkLogin($username, $password)
 {
 
     $query = 'SELECT `username`, `password` FROM `users` WHERE `username` LIKE ' . getQuote() . $username . getQuote();
 
-    $values = queryResults($query);
+    $values = $this->queryResults($query);
 
     $passwordVerified = password_verify($password, $values['password']);
 
@@ -56,7 +56,7 @@ function checkLogin($username, $password)
 
 }
 
-function session_obliterate()
+public function session_obliterate()
 {
     
     $_SESSION = array();
@@ -163,4 +163,5 @@ function session_secure_init()
     
     return $validSession;
 
+}
 }

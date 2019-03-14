@@ -11,8 +11,14 @@ require 'DataStore.php';
 
 class IndexController
 {
+    protected $dataStore;
     protected $data = [];
     protected $viewManager;
+
+    public function __construct(DataStore $dataStore , TemplateManager $viewManager){
+        $this->dataStore = $dataStore;
+        $this->viewManager = $viewManager;
+    }
 
     public function indexActions()
     {
@@ -98,7 +104,7 @@ class IndexController
             }
 
             // Check credentials.
-            if (checkLogin($username, $password)) {
+            if ($this->dataStore->checkLogin($username, $password)) {
                 
                 if ($validSession === TRUE) {
                     
@@ -174,7 +180,7 @@ class IndexController
         $this->data['errorMessage'] = $errorMessage;
         $this->data['postLoginForm'] = $postLoginForm;
 
-        $this->viewManager = new TemplateManager();
+
         $this->viewManager->setData($this->data);
         $this->viewManager->loadTemplate();
         $this->viewManager->render();
