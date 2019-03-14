@@ -6,18 +6,18 @@
  * Time: 7:47 PM
  */
 
-require 'TemplateManager.php';
-require 'DataStore.php';
-
 class IndexController
 {
     protected $dataStore;
     protected $data = [];
     protected $viewManager;
 
-    public function __construct(DataStore $dataStore , TemplateManager $viewManager){
+
+    public function __construct(DataStore $dataStore , TemplateManager $viewManager)
+    {
         $this->dataStore = $dataStore;
         $this->viewManager = $viewManager;
+
     }
 
     public function indexActions()
@@ -175,13 +175,12 @@ class IndexController
             
         }
 
-
         $this->data['userMassage'] = $userMessage;
         $this->data['errorMessage'] = $errorMessage;
         $this->data['postLoginForm'] = $postLoginForm;
 
 
-        $this->viewManager->setData($this->data);
+        $this->viewManager = new TemplateManager($this->data);
         $this->viewManager->loadTemplate();
         $this->viewManager->render();
 
